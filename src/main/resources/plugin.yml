@@ -1,0 +1,17 @@
+name: Test
+version: '${project.version}'
+main: me.edoardo.test.Test
+api-version: 1.16
+commands:
+  bgive:
+    description: give a specific backpack
+    usage: /bgive [dirt/stone/wood/leaves]
+  cbgive:
+    description: give a specific customBlock
+    usage: /cbgive [blockname]
+  pickgive:
+    description: give a specific pickaxe
+    usage: /pickgive [blockname]
+  mine:
+    description: test the creation of a mine
+    usage: /mine
