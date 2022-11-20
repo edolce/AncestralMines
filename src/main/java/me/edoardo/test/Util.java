@@ -1,9 +1,10 @@
 package me.edoardo.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.*;
 
 public class Util {
 
@@ -11,6 +12,7 @@ public class Util {
         put('A',5);
         put ('a',4);
         put ('á',4);
+        put ('à',4);
         put ('B',5);
         put ('b',5);
         put ('C',5);
@@ -105,7 +107,14 @@ public class Util {
         put (',',1);
         put (' ',3);
         put ('〶', 5);
+        put ('㊀', 5);
+        put ('㊅', 5);
+        put ('㊇', 5);
+        put ('㊂', 5);
         put ('º', 1);
+        put ('■', 5);
+        put ('★', 7);
+        put ('☆', 7);
     }};
 
 
@@ -136,6 +145,11 @@ public class Util {
             line_length -= (keys.get('&')+keys.get('l'))*(s.split("&l").length-1);
 
 
+            //Tolgo la qunatitá di valori &l che verranno tolti
+            line_length -= (keys.get('&')+keys.get('f'))*(s.split("&f").length-1);
+            //Tolgo la qunatitá di valori &l che verranno tolti
+            line_length -= (keys.get('&')+keys.get('r'))*(s.split("&r").length-1);
+
             int gap = (width - line_length)/2;
             int spacesNeeded = gap/keys.get(' ');
             System.out.println(spacesNeeded);
@@ -155,7 +169,9 @@ public class Util {
         int line_length = 0;
         int max_=0;
         for (String line:lines){
+            if(line==null) continue;
             for (char c:line.toCharArray()){
+                System.out.println(c);
                 line_length += keys.get(c);
             }
             //Tolgo la qunatitá di valori &#xxxxxx che verranno tolti
@@ -178,4 +194,43 @@ public class Util {
     }
 
 
+    // Nice little method to create a gui item with a custom name, and description
+    public static ItemStack createGuiItem(final Material material, final String name, final String... lore) {
+        final ItemStack item = new ItemStack(material, 1);
+        final ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        meta.setLore(Arrays.asList(lore));
+        item.setItemMeta(meta);
+        return item;
+    }
+
+
+
+    public static void colorAndCenterLoreAndName(ItemStack itemStack) {
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        String displayName = meta.getDisplayName();
+        List<String> lore = meta.getLore();
+        List<String> loreAndName = lore;
+
+        loreAndName.add(displayName);
+
+
+
+        List<String> newLoreAndName = new ArrayList<>();
+
+        for (String s : Util.fixLines(loreAndName)) {
+            newLoreAndName.add(ColorUtils.translateColorCodes(s));
+        }
+
+
+        meta.setDisplayName(newLoreAndName.get(newLoreAndName.size() - 1));
+        newLoreAndName.remove(newLoreAndName.size() - 1);
+        meta.setLore(newLoreAndName);
+
+        itemStack.setItemMeta(meta);
+    }
+
 }
+

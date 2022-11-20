@@ -1,6 +1,7 @@
 package me.edoardo.test.adminCommands;
 
 import me.edoardo.test.presets.Bag;
+import me.edoardo.test.presets.BagType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,7 @@ public class GiveCustomBag implements CommandExecutor {
 
         try {
             int freeSlot=((Player) sender).getInventory().firstEmpty();
-            ((Player) sender).getInventory().setItem(freeSlot, Bag.valueOf(args[0]).getBlankBagItem());
+            ((Player) sender).getInventory().setItem(freeSlot, BagType.valueOf(args[0]).getBlankBagItem());
         }catch (Exception e){
             return false;
         }

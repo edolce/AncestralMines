@@ -1,61 +1,65 @@
 package me.edoardo.test.miniere;
 
 import me.edoardo.test.Test;
-import org.bukkit.block.Block;
+import org.bukkit.Location;
 
 import java.util.List;
 import java.util.Objects;
 
 public enum RoomType {
 
-    SPAWN(1,2,3,4,5,6,new String[]{"N"}),
-    STRAIGHT_NS(1,2,3,4,5,6,new String[]{"N","S"}),
-    STRAIGHT_WE(1,2,3,4,5,6,new String[]{"W","E"}),
-    CROSSROAD(1,2,3,4,5,6,new String[]{"N","W","S","E"}),
-    TURN_NW(1,2,3,4,5,6,new String[]{"N","W"}),
-    TURN_NE(1,2,3,4,5,6,new String[]{"N","E"}),
-    TURN_SW(1,2,3,4,5,6,new String[]{"S","W"}),
-    TURN_SE(1,2,3,4,5,6,new String[]{"S","E"}),
-    IMPASSE(1,2,3,4,5,6,new String[]{});
+    SPAWN(167,56,-71,187,76,-51,new String[]{"S"}, true),
+    CROSSROAD(167,56,-50,187,76,-30,new String[]{"N","W","S","E"}, false),
+    STRAIGHT_NS(167,56,-29,187,76,-9,new String[]{"N","S"}, false),
+    STRAIGHT_WE(167,56,-7,187,76,13,new String[]{"W","E"}, false),
+    TURN_NW(251,56,-71,271,76,-51,new String[]{"N","W"}, false),
+    TURN_NE(251,56,-29,271,76,-9,new String[]{"N","E"}, false),
+    TURN_SW(209,56,-71,229,76,-51,new String[]{"S","W"}, false),
+    TURN_SE(209,56,-29,229,76,-9,new String[]{"S","E"}, false),
+    IMPASSEN(209,56,55,229,76,75,new String[]{"N"}, true),
+    IMPASSEW(251,56,55,271,76,75,new String[]{"W"}, true),
+    IMPASSES(251,56,13,271,76,33,new String[]{"S"}, true),
+    IMPASSEE(209,56,13,229,76,33,new String[]{"E"}, true);
 
-    private final Block NW_UP=null;
-    private final Block SE_DOWN=null;
+    private final Location NW_DOWN;
+    private final Location SE_UP;
     private final String[] possibleConnections;
+    private final boolean isImpasse;
 
 
 
-    RoomType(int NW_UPx,int NW_UPy,int NW_UPz,int SE_DOWNx,int SE_DOWNy,int SE_DOWNz,String[] possibleConnections){
-        //this.NW_UP = Test.getInstance().getServer().getWorld("void").getBlockAt(NW_UPx,NW_UPy,NW_UPz);
-        //this.SE_DOWN = Test.getInstance().getServer().getWorld("void").getBlockAt(SE_DOWNx,SE_DOWNy,SE_DOWNz);
+    RoomType(int NW_DOWNx, int NW_DOWNy, int NW_DOWNz, int SE_UPx, int SE_UPy, int SE_UPz, String[] possibleConnections, boolean isImpasse){
+        this.isImpasse = isImpasse;
+        this.NW_DOWN = new Location(Test.getInstance().getServer().getWorld("main"),NW_DOWNx,NW_DOWNy,NW_DOWNz);
+        this.SE_UP = new Location(Test.getInstance().getServer().getWorld("main"),SE_UPx,SE_UPy,SE_UPz);
         this.possibleConnections = possibleConnections;
     }
 
 
-    public Block getNW_UP() {
-        return NW_UP;
+    public Location getNW_DOWN() {
+        return NW_DOWN;
     }
 
-    public Block getSE_DOWN() {
-        return SE_DOWN;
+    public Location getSE_UP() {
+        return SE_UP;
     }
 
     public String[] getPossibleConnections() {
         return possibleConnections;
     }
 
-    public boolean isPossibleToAdd(List<Room> rooms, RoomType toAdd, String sideToIgnore, Room linkedRoom) {
+    public boolean isPossibleToAdd(List<Room> rooms, RoomType toAdd, String sideToIgnore, String sideToIgnoreReversed, Room linkedRoom) {
+
+
+        //Ricavo le posizioni relative che andrebbero ad occupare eventuali rooms collegate al pezzo
+        int[][] relFreePos = toAdd.getRelativeFreePosNeeded(sideToIgnoreReversed);
 
 
 
-        int[][] relFreePos = toAdd.getRelativeFreePosNeeded(sideToIgnore);
 
-        for(int i=0;i<relFreePos.length;i++){
+        for(int i=0;i<relFreePos[0].length;i++){
             int posX=relFreePos[0][i];
             int posY=relFreePos[1][i];
-
-            switch (sideToIgnore){
-
-            }
 
             int[] roomXYPos = getLinkedXYPos(linkedRoom,sideToIgnore);
 
@@ -74,7 +78,7 @@ public enum RoomType {
 
     public int[][] getRelativeFreePosNeeded(String sideToIgnore) {
 
-        int[][] relativeFreePosNeeded = new int[2][];
+        int[][] relativeFreePosNeeded = new int[2][possibleConnections.length];
 
 
         for (int k=0;k<possibleConnections.length;k++){
@@ -124,5 +128,12 @@ public enum RoomType {
             }
         }
         return null;
+    }
+
+    public boolean isImpasse() {
+        return isImpasse;
+    }
+    public boolean isNotImpasse() {
+        return !isImpasse;
     }
 }

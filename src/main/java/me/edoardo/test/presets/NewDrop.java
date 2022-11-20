@@ -1,43 +1,63 @@
 package me.edoardo.test.presets;
 
-import org.bukkit.Material;
+import me.edoardo.test.custom_blocks.CustomBlock;
 
 import java.util.HashMap;
 
 public enum NewDrop {
 
-    DIRT(new HashMap<Material,Integer>(){{
-        put(Material.COARSE_DIRT,1);
-        put(Material.DIRT,1);
-        put(Material.GRASS,1);
-        put(Material.GRASS_BLOCK,1);
+    STONE(new HashMap<CustomBlock,Integer>(){{
+        put(CustomBlock.SOFT_STONE1,5);
+        put(CustomBlock.SOFT_STONE2,10);
+        put(CustomBlock.SOFT_STONE3,20);
+//        put(CustomBlock.NORMAL_STONE1,50);
+//        put(CustomBlock.NORMAL_STONE2,100);
+//        put(CustomBlock.NORMAL_STONE3,200);
+//        put(CustomBlock.HARD_STONE1,350);
+//        put(CustomBlock.HARD_STONE2,600);
+//        put(CustomBlock.HARD_STONE3,1000);
     }}),
-    STONE(new HashMap<Material,Integer>(){{
-        put(Material.COARSE_DIRT,1);
-        put(Material.DIRT,1);
-        put(Material.GRASS,1);
-        put(Material.GRASS_BLOCK,1);
+    DIRT(new HashMap<CustomBlock,Integer>(){{
+//        put(CustomBlock.SOFT_STONE1,5);
+//        put(CustomBlock.SOFT_STONE2,10);
+//        put(CustomBlock.SOFT_STONE3,20);
+        put(CustomBlock.NORMAL_STONE1,50);
+        put(CustomBlock.NORMAL_STONE2,100);
+        put(CustomBlock.NORMAL_STONE3,200);
+//        put(CustomBlock.HARD_STONE1,350);
+//        put(CustomBlock.HARD_STONE2,600);
+//        put(CustomBlock.HARD_STONE3,1000);
     }}),
-    WOOD(new HashMap<Material,Integer>(){{
-        put(Material.COARSE_DIRT,1);
-        put(Material.DIRT,1);
-        put(Material.GRASS,1);
-        put(Material.GRASS_BLOCK,1);
+    LEAF(new HashMap<CustomBlock,Integer>(){{
+//        put(CustomBlock.SOFT_STONE1,5);
+//        put(CustomBlock.SOFT_STONE2,10);
+//        put(CustomBlock.SOFT_STONE3,20);
+//        put(CustomBlock.NORMAL_STONE1,50);
+//        put(CustomBlock.NORMAL_STONE2,100);
+//        put(CustomBlock.NORMAL_STONE3,200);
+//        put(CustomBlock.HARD_STONE1,350);
+//        put(CustomBlock.HARD_STONE2,600);
+//        put(CustomBlock.HARD_STONE3,1000);
     }}),
-    LEAF(new HashMap<Material,Integer>(){{
-        put(Material.COARSE_DIRT,1);
-        put(Material.DIRT,1);
-        put(Material.GRASS,1);
-        put(Material.GRASS_BLOCK,1);
+    WOOD(new HashMap<CustomBlock,Integer>(){{
+//        put(CustomBlock.SOFT_STONE1,5);
+//        put(CustomBlock.SOFT_STONE2,10);
+//        put(CustomBlock.SOFT_STONE3,20);
+//        put(CustomBlock.NORMAL_STONE1,50);
+//        put(CustomBlock.NORMAL_STONE2,100);
+//        put(CustomBlock.NORMAL_STONE3,200);
+        put(CustomBlock.HARD_STONE1,350);
+        put(CustomBlock.HARD_STONE2,600);
+        put(CustomBlock.HARD_STONE3,1000);
     }});
 
-    final private HashMap<Material,Integer> materials;
+    final private HashMap<CustomBlock, Integer> materials;
 
-    NewDrop(HashMap<Material,Integer> materials){
+    NewDrop(HashMap<CustomBlock, Integer> materials){
         this.materials=materials;
     }
 
-    public HashMap<Material, Integer> getMaterials() {
+    public HashMap<CustomBlock, Integer> getMaterials() {
         return materials;
     }
 }

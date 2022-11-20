@@ -1,11 +1,8 @@
 package me.edoardo.test.eventListners;
 
-import me.edoardo.test.presets.CustomBlock;
-import org.bukkit.Instrument;
+import me.edoardo.test.custom_blocks.CustomBlock;
 import org.bukkit.Material;
-import org.bukkit.Note;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

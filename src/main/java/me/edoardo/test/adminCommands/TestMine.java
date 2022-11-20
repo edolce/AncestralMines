@@ -1,9 +1,5 @@
 package me.edoardo.test.adminCommands;
 
-import me.edoardo.test.miniere.Mine;
-import me.edoardo.test.presets.CustomBlock;
-import me.edoardo.test.presets.Pickaxe;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +13,10 @@ public class TestMine implements CommandExecutor {
             return false;
         }
 
-        Mine mine = new Mine();
+        //Mine mine = new Mine(((Player) sender).getLocation().add(0,-((Player) sender).getLocation().getY()+56,0), miningBlockSet,(Player) sender);
+        //MineSystem mineSystem = new MineSystem(miningBlockSet,(Player) sender, mineData);
+
+        //mineSystem.createPhysicalMine();
 
         return true;
     }

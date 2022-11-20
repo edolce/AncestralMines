@@ -1,6 +1,6 @@
 package me.edoardo.test.adminCommands;
 
-import me.edoardo.test.presets.CustomBlock;
+import me.edoardo.test.custom_blocks.CustomBlock;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

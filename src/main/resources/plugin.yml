@@ -2,6 +2,7 @@ name: Test
 version: '${project.version}'
 main: me.edoardo.test.Test
 api-version: 1.16
+softdepend: [HolographicDisplays]
 commands:
   bgive:
     description: give a specific backpack
@@ -15,3 +16,12 @@ commands:
   mine:
     description: test the creation of a mine
     usage: /mine
+  testgui:
+    description: test different guis
+    usage: /testgui [gui_name]
+  exit:
+    description: Exit from a mine
+    usage: /exit
+  base:
+    description: open base menu
+    usage: /base
